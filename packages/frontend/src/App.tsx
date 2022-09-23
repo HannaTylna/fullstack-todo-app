@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.css';
-import Navbar from './components/Navbar';
-import TodoForm from './components/TodoForm';
+import React from "react";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import TodoForm from "./components/TodoForm";
 
 function App() {
   return (
@@ -9,7 +9,6 @@ function App() {
       <Navbar />
       <div className="container">
         <TodoForm />
-
       </div>
     </>
   );
