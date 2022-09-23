@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
+import TodoForm from './components/TodoForm';
 
 function App() {
   return (
     <>
       <Navbar />
       <div className="container">
-        <h1>Todos</h1>
+        <TodoForm />
+
       </div>
     </>
   );
