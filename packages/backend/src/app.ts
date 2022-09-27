@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app: Application = express();
-const todoRouter = require("../routers/todos");
+const todoRouter = require("./routers/todos");
 app.use(cors());
 app.use(json());
 
