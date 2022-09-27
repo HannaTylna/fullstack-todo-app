@@ -4,7 +4,7 @@ import { readFile, writeFile } from "fs";
 import crypto from "crypto";
 
 const Router = require("express");
-const router = Router();
+const TodoRouter = Router();
 
 const TODO_FILE = process.env.TODO_FILE || "todos.json";
 let TODO_ITEMS: TodoItem[] = [];
@@ -21,11 +21,11 @@ function writeTodoToFile(todoItems: TodoItem[]) {
     })
 }
 
-router.get("/", (req: Request, res: Response<TodoItem[]>) => {
+TodoRouter.get("/", (req: Request, res: Response<TodoItem[]>) => {
   res.send(TODO_ITEMS);
 });
 
-router.post("/", (req: Request, res: Response<TodoItem[]>) => {
+TodoRouter.post("/", (req: Request, res: Response<TodoItem[]>) => {
     const todoItem = req.body;
     todoItem.id = crypto.randomUUID();
     console.log("Get a new item", todoItem);
@@ -34,7 +34,7 @@ router.post("/", (req: Request, res: Response<TodoItem[]>) => {
     res.send(TODO_ITEMS);
 });
 
-router.put("/:id", async (req: Request, res: Response): Promise<void> => {
+TodoRouter.put("/:id", async (req: Request, res: Response): Promise<void> => {
     try {
         const { params: { id }, body } = req;
         const updateTodo: TodoItem | undefined = TODO_ITEMS.find(item => item.id === id);
@@ -44,4 +44,4 @@ router.put("/:id", async (req: Request, res: Response): Promise<void> => {
     }
 })
 
-module.exports = router;
+export default TodoRouter;
