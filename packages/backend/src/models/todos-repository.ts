@@ -11,3 +11,16 @@ const TodoModel = model<TodoItem>("TodoItem", TodoSchema);
 export const setupMongoDb = async (url: string) => {
     await connect(url)
 }
+
+export const loadAllTodoItems = async (): Promise<TodoItem[]> => {
+    return TodoModel.find({}).exec()
+}
+
+export const saveTodoItem = async (todoItem: TodoItem): Promise<void> => {
+    const newModel = new TodoModel(todoItem);
+    newModel.save()
+}
+
+export const loadTodoItem = async (todoId: string): Promise<TodoItem | null> => {
+    return TodoModel.findById(todoId).exec()
+}
