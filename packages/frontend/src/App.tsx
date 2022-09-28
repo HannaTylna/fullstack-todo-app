@@ -4,6 +4,7 @@ import "./App.css";
 import axios from "axios";
 import TodosPage from "./pages/TodosPage";
 import Navbar from "./components/Navbar";
+import TodoItemPage from "./pages/TodoItemPage";
 
 axios.defaults.baseURL = process.env.REACT_APP_TODO_API || "http://localhost:3001";
 
@@ -13,7 +14,8 @@ function App() {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route element={<TodosPage/>} path="/todos"/>
+          <Route element={<TodosPage />} path="/todos" />
+          <Route element={<TodoItemPage/>} path="/todos/:id"/>
         </Routes>
       </div>
     </BrowserRouter>
