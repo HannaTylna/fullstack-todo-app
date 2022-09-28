@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TodoItem from "@fullstack-todo-app/shared";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const fetchTodos = async (): Promise<TodoItem[]> => {
@@ -8,7 +9,7 @@ const fetchTodos = async (): Promise<TodoItem[]> => {
   return response.data
 }
 
-export default function TodoForm() {
+export default function TodosPage() {
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const [todoText, setTodoText] = useState<string>("");
   const [error, setError] = useState<string | undefined>();
@@ -37,9 +38,9 @@ export default function TodoForm() {
       return (<div>{error}</div>)
     } else if (todos) {
       return (
-        <div>
+        <div className="collection">
           {todos.map((item) => {
-            return <p key={item.id}>{item.text}</p>
+            return <Link key={item.id} to={`/${item.id}`} className="collection-item">{item.text}</Link>
           })}
         </div>
       )
@@ -48,22 +49,22 @@ export default function TodoForm() {
 
   return (
     <>
-    <div className="input-field mt2">
-      <input
-        type="text"
-        id="title"
-        placeholder="What do you need to do?"
-        value={todoText}
-        onChange={(e) => setTodoText(e.target.value)}
-      />
-      <label htmlFor="title" className="active">
-        What do you need to do?
-      </label>
-      <button className="btn waves-effect waves-light" type="submit" name="action" onClick={(e) => createTodo(todoText)}>Save
-        <i className="material-icons right">send</i>
-      </button>
-    </div>
-    {outputTodo()}
+      {outputTodo()}
+      <div className="input-field mt10 df">
+        <input
+          type="text"
+          id="title"
+          placeholder="What do you need to do?"
+          value={todoText}
+          onChange={(e) => setTodoText(e.target.value)}
+        />
+        <label htmlFor="title" className="active">
+          What do you need to do?
+        </label>
+        <button className="btn waves-effect waves-light ml2" type="submit" name="action" onClick={(e) => createTodo(todoText)}>Save
+          <i className="material-icons right">send</i>
+        </button>
+      </div>
     </>
   );
 }
