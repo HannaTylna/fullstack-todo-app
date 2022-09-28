@@ -15,7 +15,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route element={<TodosPage />} path="/todos" />
-          <Route element={<TodoItemPage/>} path="/todos/:id"/>
+          <Route element={<TodoItemPage/>} path="/todo/:id"/>
         </Routes>
       </div>
     </BrowserRouter>
