@@ -19,3 +19,12 @@ code {
 .mt2 {
   margin-top: 2rem;
 }
+.df {
+  display: flex;
+}
+.mt10 {
+  margin-top: 10rem;
+}
+.ml2 {
+  margin-left: 2rem;
+}
