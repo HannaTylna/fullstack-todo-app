@@ -40,8 +40,8 @@ export default function TodosPage() {
     } else if (todos) {
       return (
         <div className="collection">
-          {todos.map((item, idx) => {
-            return <Link key={idx} to={`/todo/${item.id}`} className="collection-item">{item.text}</Link>
+          {todos.map((item) => {
+            return <Link key={item._id} to={`/todo/${item._id}`} className="collection-item">{item.text}</Link>
           })}
         </div>
       )
