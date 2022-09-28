@@ -6,6 +6,6 @@ import TodoItem from "../components/TodoItem";
 export default function TodoItemPage() {
     const params = useParams();
     return (
-        <TodoItem _id={params._id} />
+        <TodoItem id={params.id} />
     )
 }

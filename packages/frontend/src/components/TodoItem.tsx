@@ -1,9 +1,5 @@
 import React from "react";
 
-interface IMyProps {
-    _id: string | undefined;
-}
-
-export default function TodoItem(props: IMyProps) {
-    return (<h1>Todo Item </h1>)
+export default function TodoItem(props: {id: string | undefined}) {
+    return (<h1>`Todo Item {props.id}`</h1>)
 }
