@@ -23,6 +23,7 @@ export default function TodosPage() {
       await axios.post<TodoItem[]>("/todos", todoItem);
       const response = await axios.get<TodoItem[]>("/todos");
       setTodos(response.data)
+      console.log(response.data)
     } catch (err) {
       setTodos([]);
       setError("Fetching wrong....")
@@ -39,8 +40,8 @@ export default function TodosPage() {
     } else if (todos) {
       return (
         <div className="collection">
-          {todos.map((item) => {
-            return <Link key={item.id} to={`/${item.id}`} className="collection-item">{item.text}</Link>
+          {todos.map((item, idx) => {
+            return <Link key={idx} to={`/todo/${item.id}`} className="collection-item">{item.text}</Link>
           })}
         </div>
       )
