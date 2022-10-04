@@ -12,7 +12,8 @@
   "license": "ISC",
   "workspaces": [
     "packages/backend",
-    "packages/frontend"
+    "packages/frontend",
+    "packages/shared"
   ],
   "devDependencies": {
     "prettier": "^1.19.1"
