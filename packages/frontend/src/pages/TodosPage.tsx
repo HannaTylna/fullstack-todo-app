@@ -31,7 +31,15 @@ export default function TodosPage() {
   }
 
   useEffect(() => {
-    fetchTodos().then(setTodos)
+    const interval = setInterval(() => {
+      fetchTodos()
+        .then(setTodos)
+        .catch((error) => {
+          setTodos([]);
+          setError("Something went wrong when fetching my todos...")
+      })
+    }, 5000)
+    return () => clearInterval(interval)
   }, [])
 
   const outputTodo = () => {
