@@ -1,45 +1,20 @@
-import mongoose, { Document, Model, ObjectId, Schema } from "mongoose";
-import validator from "validator";
-import constants from "../constants";
+import { model, Schema } from "mongoose";
 
-export interface IUser extends Document<any> {
+export interface IUser{
     username: string;
     password: string;
-    email: string;
-    address: string;
+    name: string
     roles: string[];
 }
 
-// custom functions
-export interface IUserModel extends Model<IUser> {
-    build(user: IUser): IUser;
-    isEmailTaken(email: string, exclude: ObjectId): Promise<boolean>;
-    isUserNameTaken(userName: string, exclude: ObjectId): Promise<boolean>;
-    findByEmailOrPassword(username: string, email: string): Promise<IUser>;
-}
-
-const userSchema = new Schema<IUser, IUserModel>({
+const UserSchema = new Schema({
     username: { type: String, required: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    roles: Array<String>
 });
 
-userSchema.statics.build = (user: IUser) => {
-    return new User(user);
-};
+const UserModel = model<IUser>("IUser", UserSchema);
 
-userSchema.statics.isEmailTaken = async function (email: string, exclude?: ObjectId): Promise<boolean> {
-    const user = await this.findOne({ email, _id: { $ne: exclude } });
-    return !!user;
-};
-
-userSchema.statics.isUserNameTaken = async function (userName: string, exclude?: ObjectId): Promise<boolean> {
-    const user = await this.findOne({ username: userName, _id: { $ne: exclude } });
-    return !!user;
-};
-
-userSchema.statics.findByEmailOrPassword = async function (username: string, email: string): Promise<IUser | null> {
-    return this.findOne({ $or: [{ email }, { username }] }).exec();
-};
-
-const User = mongoose.model<IUser, IUserModel>(constants.models.USER, userSchema);
-export default User;
+export const loadUserByUsername = async (username: string): Promise<IUser | null> => {
+    return await UserModel.findOne({username: username}).exec()
+}
