@@ -2,7 +2,7 @@ import express, { Application, json} from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import todoRouter from "./routers/todos-router"
-import { setupMongoDb } from "./models/todos-repository";
+import { setupMongoDb } from "./models/common";
 
 dotenv.config();
 

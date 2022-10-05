@@ -1,5 +1,5 @@
 import { TodoItem } from "@fullstack-todo-app/shared";
-import { model, Schema, connect } from "mongoose";
+import { model, Schema } from "mongoose";
 
 const TodoSchema = new Schema({
     text: String,
@@ -7,10 +7,6 @@ const TodoSchema = new Schema({
 })
 
 const TodoModel = model<TodoItem>("TodoItem", TodoSchema);
-
-export const setupMongoDb = async (url: string) => {
-    await connect(url)
-}
 
 export const loadAllTodoItems = async (): Promise<TodoItem[]> => {
     return TodoModel.find({}).exec()
