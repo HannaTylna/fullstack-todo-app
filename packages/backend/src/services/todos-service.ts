@@ -1,15 +1,17 @@
-import TodoItem from "@fullstack-todo-app/shared";
+import { TodoItem } from "@fullstack-todo-app/shared";
 import { loadAllTodoItems, loadTodoItem, saveTodoItem } from "../models/todos-repository";
 
 export const loadTodos = async (): Promise<TodoItem[]> => {
     return await loadAllTodoItems();
 }
 
-export const saveTodo = async (todoItem: TodoItem): Promise<TodoItem[]> => {
+export const saveTodo = async (todoItem: TodoItem, author: string): Promise<TodoItem[]> => {
     if (!todoItem.text || todoItem.text == "") {
         throw new Error("You need to write something!")
     }
     todoItem.timeStamp = new Date();
+    todoItem.author = author;
+    
     await saveTodoItem(todoItem);
     return await loadAllTodoItems()
 }
