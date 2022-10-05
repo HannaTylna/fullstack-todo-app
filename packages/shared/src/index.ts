@@ -1,2 +1,2 @@
-export { User } from "./user";
+export { Credentials } from "./credentials";
 export { TodoItem } from "./todo-item";
