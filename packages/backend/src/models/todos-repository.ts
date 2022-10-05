@@ -1,4 +1,4 @@
-import TodoItem from "@fullstack-todo-app/shared";
+import { TodoItem } from "@fullstack-todo-app/shared";
 import { model, Schema, connect } from "mongoose";
 
 const TodoSchema = new Schema({
