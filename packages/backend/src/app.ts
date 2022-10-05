@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import todoRouter from "./routers/todos-router"
 import { setupMongoDb } from "./models/common";
+import { authenticateToken, loginUser } from "./services/auth";
 
 dotenv.config();
 
@@ -12,7 +13,9 @@ app.use(json());
 const port: number = parseInt(process.env.SERVER_PORT || "3001");
 const mongoUrl: string = process.env.MONGO_URL || 'mongodb://localhost:27017/todosTS';
 
-app.use("/todos", todoRouter)
+app.post("/", loginUser);
+app.use("/todos", authenticateToken);
+app.use("/todos", todoRouter);
 
 app.listen(port, async function () {
   await setupMongoDb(mongoUrl);
